@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${titulo}"></title>
+</head>
+<body>
+
+
+
+	<h1 th:text="${titulo}"></h1>
+		
+		
+		<table>
+			<thead>
+				<tr><th> Id </th> 
+					<th> Nombre </th> 
+					<th> Puesto </th> 
+					<th> Salario </th> 
+				</tr>
+			</thead>
+			
+			<tbody>
+			
+				<tr th:if="${empleados.empty}">
+					<td colspan="10" style="color:red"><span><b>No Existe el Puesto o tipo de Faena, ponga los datos correctos</b></span></td>
+				</tr>
+				
+				<tr th:each="empleado: ${empleados}">
+					<td><span th:text="${empleado.id}"></span></td>
+					<td><span th:text="${empleado.nombre}"></span></td>
+					<td><span th:text="${empleado.faena}"></span></td>
+					<td><span th:text="${empleado.salario}"></span></td>
+					<td><a th:href="@{/editar/}+${empleado.id}">Editar</a></td>
+					<td><a th:href="@{/borrar/}+${empleado.id}">Borrar</a></td>
+					
+				</tr>
+				
+			</tbody>
+			
+		</table>
+		
+		<form method="POST" th:action="@{${action}}">
+			
+					<input type="hidden" name="id" th:value="${empleado?.id} ?: ${#lists.size(empleados)}"><br><br> 
+			<!-- //*** ${#lists.size(empleados)} ***// Recupera el tamaño de array de empleados y lo injecta 
+			en el proceso de editar porque lo ocultamos por defaul, el control de asignacion de id lo controlamos en el 'repository'   -->
+					
+			Nombre: <input type="text" name="nombre" th:value="${empleado?.nombre}"><br><br>
+			Faena: <input type="text" name="faena" placeholder="Introduce PEON o JEFE" th:value="${empleado?.faena}"><br><br>
+			Salario	: <input type="text" name="salario" th:value="${empleado?.salario} ?: '0'"><br><br>
+			<input type="submit" name="submit" th:value="${boton}">
+		</form><br>
+		<a th:href="@{/}"><b>Limpiar</b></a><br>
+				
+		<form method="POST" action="/faena">
+			<br><br>
+			<b>Buscar por Faena</b><br><br>
+			Faena: <input type="text" name="faena" placeholder="Introduce PEON o JEFE"><br><br>
+			<input type="submit" name="submit" value="Buscar trabajadores">
+		</form>
+		
+		<br><a th:href="@{/}"><b>Limpiar</b></a>
+
+</body>
+</html>
