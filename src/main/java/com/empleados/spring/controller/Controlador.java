@@ -1,28 +1,31 @@
 package com.empleados.spring.controller;
 
-import java.security.PublicKey;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.empleados.spring.model.Empleado;
-import com.empleados.spring.repository.BaseDatos;
-import com.empleados.spring.usuario.Usuario;
+import com.empleados.spring.repository.*;
 
 @Controller
 @RequestMapping("")
 public class Controlador {
 	
-	BaseDatos bd = new BaseDatos();
+	//BaseDatos bd = new BaseDatos();
+	BaseDatosJDBC bd = new BaseDatosJDBC();
+
+	@GetMapping("/demo1")
+	public String index2(Model model) {
+						
+		return "demo";
+	}
 	
 	@GetMapping("/")
-	public String login(Model model) {
+	public String index(Model model) {
 		
 		List<Empleado> empleados = bd.getEmpleados();
 		model.addAttribute("empleados",empleados);
@@ -31,6 +34,7 @@ public class Controlador {
 						
 		return "index";
 	}
+	
 	
 	@PostMapping("/insertar")
 	public String insertar(Empleado empleado, Model model) {
@@ -62,7 +66,7 @@ public class Controlador {
 		ArrayList<Empleado> empleados = bd.getEmpleados();
 		model.addAttribute("empleados", empleados);
 		model.addAttribute("boton", "Añadir Empleado");
-		model.addAttribute("action", "/");
+		model.addAttribute("action", "/insertar");
 		
 		return "index";
 	}
@@ -89,6 +93,7 @@ public class Controlador {
 		
 		return "index";
 	}
+	
 	
 	@PostMapping("/faena")
 	public String faena(String faena, Model model) {

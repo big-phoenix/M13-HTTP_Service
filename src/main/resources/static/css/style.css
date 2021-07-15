@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+a{
+	font-weight:bold;
+}
+
+.container,
+#form1,
+#form2{
+	float:left;
+	margin-left:5%;
+	margin-bottom: 5%;
+	
+}
+
+
+.form label,
+#form2 label{
+	display: block;
+	margin-bottom: 5%;
+	 
+}
+
+.form input[type=text],
+#form2 input[type=text]{
+  display: block;
+  margin-bottom: 5%;
+}
+
+.form input[type=submit],
+#form2 input[type=submit]{
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.form input[type=button]{
+	display: block;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}

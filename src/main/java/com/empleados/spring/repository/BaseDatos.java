@@ -32,7 +32,7 @@ public class BaseDatos {
 		
 		for (Empleado empleado : empleados) {
 			if(empleado.getFaena()==puestos[0].getPuesto()) empleado.setSalario(1500);
-			if(empleado.getFaena()==puestos[1].getPuesto()) empleado.setSalario(1800);
+			if(empleado.getFaena()==puestos[1].getPuesto()) empleado.setSalario(1900);
 			
 		}
 		
@@ -47,9 +47,6 @@ public class BaseDatos {
 		return empleados.get(id-1);
 	}
 	
-	public void setEmpleados(ArrayList<Empleado> empleados) {
-		this.empleados = empleados;
-	}
 	
 	public void inserta(Empleado empleado) {
 		
@@ -58,11 +55,7 @@ public class BaseDatos {
 		empleado.setFaena(fa);
 		int id = empleados.size();
 		empleado.setId(id+1);
-		Double sal = empleado.getSalario();
 		
-		if(sal.isNaN()) {
-			empleado.setSalario(0);
-		}
 		
 		for(int i=0;i<puestos.length;i++) {
 			if(fa.equals(puestos[i].getPuesto())) {
